@@ -63,8 +63,8 @@ interface TextFieldProps {
   placeholder?: string;
   hint?: ReactNode;
   warn?: boolean;
-  /** "date" gets the native picker; "decimal" is a numeric keypad on a phone. */
-  type?: "text" | "date";
+  /** "date" and "time" get the native pickers; "decimal" is a phone keypad. */
+  type?: "text" | "date" | "time";
   numeric?: boolean;
   /** Upper-cases as you type — for a PAN, where lower case would be wrong. */
   uppercase?: boolean;
