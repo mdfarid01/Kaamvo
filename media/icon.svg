@@ -1,0 +1,7 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kaamvo icon">
+  <rect width="512" height="512" rx="112" fill="#2C2C2A"/>
+  <rect x="150" y="150" width="86" height="86" rx="20" fill="#5F5E5A"/>
+  <rect x="276" y="150" width="86" height="86" rx="20" fill="#5F5E5A"/>
+  <rect x="150" y="276" width="86" height="86" rx="20" fill="#5F5E5A"/>
+  <circle cx="319" cy="319" r="43" fill="#D85A30"/>
+</svg>

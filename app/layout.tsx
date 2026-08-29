@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   },
   description:
     "A collection of fast, private file and text tools. No account required. Files never leave your device.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export const viewport: Viewport = {
@@ -30,12 +35,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
+// The icon mark from media/icon.svg, inlined so the wordmark next to it renders
+// in Geist. Shipping logo-horizontal.svg as an <img> would draw its baked-in
+// Arial <text> instead, which reads as a different font from the rest of the UI.
+function KaamvoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 512 512" className={className} aria-hidden="true" focusable="false">
+      <rect width="512" height="512" rx="112" fill="#2C2C2A" />
+      <rect x="150" y="150" width="86" height="86" rx="20" fill="#5F5E5A" />
+      <rect x="276" y="150" width="86" height="86" rx="20" fill="#5F5E5A" />
+      <rect x="150" y="276" width="86" height="86" rx="20" fill="#5F5E5A" />
+      <circle cx="319" cy="319" r="43" fill="#D85A30" />
+    </svg>
+  );
+}
+
 function SiteHeader() {
   return (
     <header className="border-b border-line-soft">
       <div className="mx-auto flex h-14 w-full max-w-content items-center justify-between px-6">
-        <Link href="/" className="text-[15px] font-medium tracking-[-0.01em] text-ink">
-          kaamvo
+        <Link href="/" className="flex items-center gap-2 text-ink">
+          <KaamvoMark className="h-[22px] w-[22px]" />
+          <span className="text-[15px] font-medium tracking-[-0.01em]">kaamvo</span>
         </Link>
         <span className="text-[13px] text-muted">Runs in your browser</span>
       </div>

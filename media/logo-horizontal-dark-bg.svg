@@ -1,0 +1,8 @@
+<svg width="360" height="100" viewBox="0 0 360 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kaamvo logo">
+  <rect x="8" y="8" width="84" height="84" rx="18" fill="#F1EFE8"/>
+  <rect x="26" y="26" width="24" height="24" rx="6" fill="#B4B2A9"/>
+  <rect x="58" y="26" width="24" height="24" rx="6" fill="#B4B2A9"/>
+  <rect x="26" y="58" width="24" height="24" rx="6" fill="#B4B2A9"/>
+  <circle cx="70" cy="70" r="12" fill="#D85A30"/>
+  <text x="112" y="63" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="600" fill="#F1EFE8">kaamvo</text>
+</svg>
