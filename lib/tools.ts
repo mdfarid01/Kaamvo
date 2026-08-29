@@ -141,7 +141,7 @@ export const TOOLS: Tool[] = [
     name: "Diff Checker",
     description: "Compare two blocks of text and highlight what changed.",
     category: "Text",
-    status: "planned",
+    status: "live",
     keywords: ["compare", "changes", "difference"],
   },
   {
@@ -165,7 +165,7 @@ export const TOOLS: Tool[] = [
     name: "Hash Generator",
     description: "Compute SHA-1, SHA-256 and SHA-512 digests of text or files.",
     category: "Generate",
-    status: "planned",
+    status: "live",
     keywords: ["sha", "md5", "checksum", "digest"],
   },
   {
@@ -173,7 +173,7 @@ export const TOOLS: Tool[] = [
     name: "Base64 Encoder",
     description: "Encode and decode text or files as Base64.",
     category: "Convert",
-    status: "planned",
+    status: "live",
     keywords: ["encode", "decode", "data uri"],
   },
 ];
