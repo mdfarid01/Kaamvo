@@ -78,6 +78,17 @@ export const TOOLS: Tool[] = [
     keywords: ["png", "jpg", "render", "screenshot"],
   },
   {
+    slug: "pdf-to-ppt",
+    name: "PDF to PPT",
+    // The limitation belongs in the description: it's what someone reads on the
+    // home page before they click, and it's the whole difference between this
+    // tool and what "PDF to PowerPoint" usually promises.
+    description: "Put each PDF page on its own slide as an image — not editable text.",
+    category: "Convert",
+    status: "live",
+    keywords: ["powerpoint", "pptx", "slides", "presentation", "deck", "keynote", "google slides"],
+  },
+  {
     slug: "image-to-pdf",
     name: "Image to PDF",
     description: "Wrap one or more images into a single PDF document.",
