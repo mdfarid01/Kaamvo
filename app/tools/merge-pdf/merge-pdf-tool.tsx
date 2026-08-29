@@ -6,14 +6,9 @@ import { Card } from "@/components/ui/card";
 import { DropZone } from "@/components/ui/drop-zone";
 import { FileList } from "@/components/ui/file-list";
 import type { FileListItem } from "@/components/ui/file-list";
-import {
-  ACCEPT_ATTRIBUTE,
-  MAX_TOTAL_BYTES,
-  loadPdf,
-  mergePdfs,
-  mergedFileName,
-} from "@/lib/pdf-merge";
-import type { LoadedPdf } from "@/lib/pdf-merge";
+import { ACCEPT_ATTRIBUTE, loadPdf } from "@/lib/pdf-load";
+import type { LoadedPdf } from "@/lib/pdf-load";
+import { MAX_TOTAL_BYTES, mergePdfs, mergedFileName } from "@/lib/pdf-merge";
 import { formatBytes, moveItem } from "@/lib/utils";
 
 /**

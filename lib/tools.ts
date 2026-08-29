@@ -31,10 +31,10 @@ export const TOOLS: Tool[] = [
   {
     slug: "split-pdf",
     name: "Split PDF",
-    description: "Pull out single pages or page ranges into separate files.",
+    description: "Pull out single pages or page ranges into a new file.",
     category: "PDF",
-    status: "planned",
-    keywords: ["extract", "pages", "separate"],
+    status: "live",
+    keywords: ["extract", "pages", "separate", "range"],
   },
   {
     slug: "compress-pdf",
@@ -49,7 +49,7 @@ export const TOOLS: Tool[] = [
     name: "Rotate PDF",
     description: "Turn pages 90, 180 or 270 degrees and save the result.",
     category: "PDF",
-    status: "planned",
+    status: "live",
     keywords: ["turn", "orientation", "sideways"],
   },
   {

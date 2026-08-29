@@ -1,95 +1,29 @@
 /**
- * PDF merging for the Merge PDF tool. Files in, one PDF out — the same
+ * PDF merging for the Merge PDF tool. Loaded files in, one PDF out — the same
  * split as lib/image-to-pdf.ts, so the UI layer stays a thin wrapper and nothing
- * outside this file touches pdf-lib.
+ * outside lib/ touches pdf-lib.
  *
- * Neither entry point is pure — both read files and parse them — and both return
- * a result union rather than throwing, so a password-protected file is handled
- * like any other outcome.
- *
- * Loading is split from merging on purpose. A file is parsed once, as it's
- * dropped, which is what lets the list show its page count and flag a file that
- * can't be read; merging then reuses that parse instead of doing it again, so
- * reordering and re-merging a set of large files stays quick.
+ * Reading a file is lib/pdf-load.ts's job, shared with Split PDF and Rotate
+ * PDF. What's left here is the merge itself, which returns a result union
+ * rather than throwing, like everything else in this directory.
  */
 
 import { PDFDocument } from "pdf-lib";
 
+import { isOutOfMemory } from "./pdf-load";
+import type { LoadedPdf } from "./pdf-load";
 import { bytesToBlob } from "./utils";
 
 /**
- * Both the MIME type and the extension: a PDF dragged out of some archive tools
- * arrives with an empty type, and then the extension is all the picker has.
- */
-export const ACCEPT_ATTRIBUTE = "application/pdf,.pdf";
-
-/**
- * Parsing and writing happen on the main thread, like the other tools here, so
- * the caps keep a drop from locking the tab up rather than failing. 100 MB is
- * past any scanned document; 300 MB of input is already more than most browsers
+ * Merging is the only tool here that holds several files at once, so it's the
+ * only one with a total. 300 MB of input is already more than most browsers
  * will hold while writing the result.
  */
-export const MAX_FILE_BYTES = 100 * 1024 * 1024;
 export const MAX_TOTAL_BYTES = 300 * 1024 * 1024;
-
-export interface LoadedPdf {
-  name: string;
-  size: number;
-  pageCount: number;
-  /** @internal Parsed on the way in, so merging doesn't re-read it. */
-  readonly doc: PDFDocument;
-}
-
-export type LoadPdfResult = { ok: true; pdf: LoadedPdf } | { ok: false; error: string };
 
 export type MergeResult =
   | { ok: true; blob: Blob; pageCount: number }
   | { ok: false; error: string };
-
-export function isPdf(file: File): boolean {
-  if (file.type !== "") return file.type === "application/pdf";
-  return /\.pdf$/i.test(file.name);
-}
-
-/**
- * Reads and parses one file. Called as each file arrives rather than at merge
- * time, so a problem is reported next to the file that caused it.
- */
-export async function loadPdf(file: File): Promise<LoadPdfResult> {
-  if (!isPdf(file)) {
-    return { ok: false, error: `${file.name} isn't a PDF.` };
-  }
-  if (file.size === 0) {
-    return { ok: false, error: `${file.name} is empty.` };
-  }
-  if (file.size > MAX_FILE_BYTES) {
-    return { ok: false, error: `${file.name} is over 100 MB — too big to merge in the browser.` };
-  }
-
-  let bytes: ArrayBuffer;
-  try {
-    bytes = await file.arrayBuffer();
-  } catch {
-    return { ok: false, error: `Couldn't read ${file.name}.` };
-  }
-
-  try {
-    const doc = await PDFDocument.load(bytes, {
-      // These files are only ever sources to copy pages out of, so there's no
-      // point rewriting their modification date on the way in.
-      updateMetadata: false,
-    });
-
-    const pageCount = doc.getPageCount();
-    if (pageCount === 0) {
-      return { ok: false, error: `${file.name} has no pages in it.` };
-    }
-
-    return { ok: true, pdf: { name: file.name, size: file.size, pageCount, doc } };
-  } catch (error) {
-    return { ok: false, error: describeLoadError(error, file.name) };
-  }
-}
 
 /**
  * Copies every page of every file into one document, in the order given.
@@ -136,26 +70,8 @@ export function mergedFileName(names: string[]): string {
   return `${base === "" ? "merged" : `${base}-merged`}.pdf`;
 }
 
-function describeLoadError(error: unknown, name: string): string {
-  const message = error instanceof Error ? error.message : String(error);
-
-  // pdf-lib can open an encrypted file with { ignoreEncryption: true }, but it
-  // can't decrypt one: the page contents come out as ciphertext and the merged
-  // file is quietly unreadable. Stopping here is the honest outcome.
-  if (/encrypt/i.test(message)) {
-    return `${name} is encrypted, so its pages can't be copied. Remove the password and try again.`;
-  }
-  if (/no pdf header|expected instance of pdfdict|failed to parse|stream/i.test(message)) {
-    return `Couldn't read ${name} — it may be corrupt or not really a PDF.`;
-  }
-
-  return message === ""
-    ? `Couldn't read ${name}.`
-    : `Couldn't read ${name} — it may be corrupt or not really a PDF.`;
-}
-
 function describeMergeError(error: unknown): string {
-  if (error instanceof RangeError || (error instanceof Error && /memory|allocat/i.test(error.message))) {
+  if (isOutOfMemory(error)) {
     return "Ran out of memory merging these — try fewer files at a time.";
   }
 
