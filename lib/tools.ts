@@ -73,7 +73,7 @@ export const TOOLS: Tool[] = [
     name: "Resize Image",
     description: "Change an image's dimensions by pixels or percentage.",
     category: "Image",
-    status: "planned",
+    status: "live",
     keywords: ["scale", "dimensions", "shrink", "enlarge"],
   },
   {
@@ -89,15 +89,18 @@ export const TOOLS: Tool[] = [
     name: "Crop Image",
     description: "Trim an image to a selection or a fixed aspect ratio.",
     category: "Image",
-    status: "planned",
+    status: "live",
     keywords: ["trim", "cut", "aspect ratio"],
   },
   {
     slug: "convert-image",
     name: "Convert Image",
-    description: "Move between PNG, JPG, WebP and AVIF formats.",
+    // AVIF is offered whenever a browser can encode it (see lib/image-convert.ts),
+    // but none can today, so promising it here would be promising a button that
+    // isn't there.
+    description: "Move between PNG, JPG and WebP formats.",
     category: "Convert",
-    status: "planned",
+    status: "live",
     keywords: ["png", "jpg", "webp", "avif", "format"],
   },
   {
