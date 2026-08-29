@@ -154,7 +154,7 @@ export const TOOLS: Tool[] = [
     name: "Password Generator",
     description: "Build strong random passwords with rules you set.",
     category: "Generate",
-    status: "planned",
+    status: "live",
     keywords: ["random", "secure", "passphrase"],
   },
   {
