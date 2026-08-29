@@ -77,12 +77,12 @@ export const TOOLS: Tool[] = [
     keywords: ["scale", "dimensions", "shrink", "enlarge"],
   },
   {
-    slug: "compress-image",
-    name: "Compress Image",
+    slug: "image-compressor",
+    name: "Image Compressor",
     description: "Cut image file size with adjustable quality.",
     category: "Image",
-    status: "planned",
-    keywords: ["optimize", "quality", "smaller", "jpeg"],
+    status: "live",
+    keywords: ["compress", "optimize", "quality", "smaller", "jpeg", "jpg", "png", "webp"],
   },
   {
     slug: "crop-image",
