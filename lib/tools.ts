@@ -142,12 +142,12 @@ export const TOOLS: Tool[] = [
     keywords: ["compare", "changes", "difference"],
   },
   {
-    slug: "qr-code",
+    slug: "qr-generator",
     name: "QR Code Generator",
     description: "Turn a link or block of text into a downloadable QR code.",
     category: "Generate",
-    status: "planned",
-    keywords: ["barcode", "link", "scan"],
+    status: "live",
+    keywords: ["barcode", "link", "scan", "png", "url"],
   },
   {
     slug: "password-generator",
