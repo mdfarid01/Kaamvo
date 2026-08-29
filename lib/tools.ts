@@ -65,8 +65,8 @@ export const TOOLS: Tool[] = [
     name: "Image to PDF",
     description: "Wrap one or more images into a single PDF document.",
     category: "Convert",
-    status: "planned",
-    keywords: ["png", "jpg", "photos", "scan"],
+    status: "live",
+    keywords: ["png", "jpg", "photos", "scan", "combine", "album"],
   },
   {
     slug: "resize-image",

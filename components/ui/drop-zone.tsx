@@ -46,7 +46,9 @@ export function DropZone({
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
     // Without preventDefault the browser navigates to the dropped file.
     event.preventDefault();
-    if (!disabled) setIsDragging(true);
+    // Only files light the zone up. Dragging a row of a reorderable list past
+    // it is not a drop this zone can take, so it shouldn't look like one.
+    if (!disabled && event.dataTransfer.types.includes("Files")) setIsDragging(true);
   };
 
   const open = () => {
