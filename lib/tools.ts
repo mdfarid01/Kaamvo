@@ -1,4 +1,11 @@
-export type ToolCategory = "PDF" | "Image" | "Text" | "Convert" | "Generate";
+export type ToolCategory =
+  | "PDF"
+  | "Image"
+  | "Text"
+  | "Convert"
+  | "Generate"
+  | "Finance"
+  | "Everyday";
 
 /**
  * `live` tools have a hand-written page under app/tools/<slug>/page.tsx.
@@ -17,7 +24,17 @@ export interface Tool {
   keywords?: string[];
 }
 
-export const CATEGORIES: ToolCategory[] = ["PDF", "Image", "Text", "Convert", "Generate"];
+export const CATEGORIES: ToolCategory[] = [
+  "PDF",
+  "Image",
+  "Text",
+  "Convert",
+  "Generate",
+  "Finance",
+  // The calculators that aren't about money: dates, ages, percentages. Finance
+  // would imply they are, and Generate is for tools that produce a file.
+  "Everyday",
+];
 
 export const TOOLS: Tool[] = [
   {
@@ -199,6 +216,97 @@ export const TOOLS: Tool[] = [
     category: "Convert",
     status: "live",
     keywords: ["encode", "decode", "data uri"],
+  },
+  {
+    slug: "unit-converter",
+    name: "Unit Converter",
+    description: "Convert length, weight, temperature, speed, area and data sizes.",
+    category: "Convert",
+    status: "live",
+    keywords: [
+      "metric",
+      "imperial",
+      "km to miles",
+      "kg to pounds",
+      "celsius",
+      "fahrenheit",
+      "inches",
+      "feet",
+      "acre",
+      "mb to gb",
+    ],
+  },
+  {
+    slug: "emi-calculator",
+    name: "EMI Calculator",
+    description: "Work out the monthly instalment, total interest and total payment on a loan.",
+    category: "Finance",
+    status: "live",
+    keywords: ["loan", "home loan", "car loan", "instalment", "installment", "interest", "tenure"],
+  },
+  {
+    slug: "sip-calculator",
+    name: "SIP Calculator",
+    description: "See what a monthly investment grows to, and how much of it is returns.",
+    category: "Finance",
+    status: "live",
+    keywords: ["mutual fund", "systematic investment plan", "monthly investment", "returns", "maturity"],
+  },
+  {
+    slug: "compound-interest",
+    name: "Compound Interest Calculator",
+    description: "Grow a principal at a rate over time, compounded as often as you like.",
+    category: "Finance",
+    status: "live",
+    keywords: ["interest", "fd", "deposit", "savings", "compounding", "annual", "quarterly"],
+  },
+  {
+    slug: "age-calculator",
+    name: "Age Calculator",
+    description: "Find an exact age in years, months and days, with a countdown to the next birthday.",
+    category: "Everyday",
+    status: "live",
+    keywords: [
+      "date of birth",
+      "dob",
+      "how old",
+      "birthday",
+      "days lived",
+      "age in days",
+      "age on date",
+    ],
+  },
+  {
+    slug: "date-difference",
+    name: "Date Difference Calculator",
+    description: "Count the years, months, days and weeks between two dates.",
+    category: "Everyday",
+    status: "live",
+    keywords: [
+      "days between dates",
+      "date calculator",
+      "duration",
+      "how many days",
+      "weeks between",
+      "deadline",
+    ],
+  },
+  {
+    slug: "percentage-calculator",
+    name: "Percentage Calculator",
+    description: "Percent of a number, a share of a total, and increases or decreases by percent.",
+    category: "Everyday",
+    status: "live",
+    keywords: [
+      "percent",
+      "%",
+      "percentage change",
+      "increase",
+      "decrease",
+      "discount",
+      "marks",
+      "out of",
+    ],
   },
 ];
 

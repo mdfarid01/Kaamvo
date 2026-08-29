@@ -6,4 +6,5 @@ export type { FileListItem } from "./file-list";
 export { FileSummary } from "./file-summary";
 export { FieldGroup, SelectField, TextAreaField, TextField } from "./field";
 export { PageRangeField } from "./page-range-field";
+export { ResultStat, SplitBar } from "./result-stat";
 export { Tag } from "./tag";
