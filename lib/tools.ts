@@ -130,7 +130,7 @@ export const TOOLS: Tool[] = [
     name: "JSON Formatter",
     description: "Pretty-print, minify and validate JSON.",
     category: "Text",
-    status: "planned",
+    status: "live",
     keywords: ["pretty print", "beautify", "minify", "validate"],
   },
   {
