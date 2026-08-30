@@ -20,6 +20,16 @@ const config: Config = {
         // Darkened accent for small text on an accent tint — #D85A30 and even
         // #C34D26 fall under 4.5:1 on a light tint; this clears it.
         "accent-deep": "#A33F1E",
+        // Per-category icon tints. Deliberately desaturated and warm-leaning so
+        // they read as a family with the canvas rather than a rainbow icon set —
+        // each one is roughly canvas lightness with a single hue nudge.
+        "category-pdf-bg": "#E4D3CA",
+        "category-image-bg": "#CFDCD7",
+        "category-text-bg": "#D4D9DE",
+        "category-convert-bg": "#D9D5E0",
+        "category-generate-bg": "#E5DCC3",
+        "category-finance-bg": "#D6DCC9",
+        "category-everyday-bg": "#DFD8CD",
       },
       borderRadius: {
         DEFAULT: "6px",

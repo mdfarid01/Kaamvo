@@ -68,6 +68,21 @@ const paths: Record<ToolCategory, React.ReactNode> = {
   ),
 };
 
+/**
+ * Icon-square background per category. Lives next to the glyphs so a new
+ * category can't be added with one and not the other; the tokens themselves are
+ * in tailwind.config.ts.
+ */
+export const CATEGORY_ICON_BG: Record<ToolCategory, string> = {
+  PDF: "bg-category-pdf-bg",
+  Image: "bg-category-image-bg",
+  Text: "bg-category-text-bg",
+  Convert: "bg-category-convert-bg",
+  Generate: "bg-category-generate-bg",
+  Finance: "bg-category-finance-bg",
+  Everyday: "bg-category-everyday-bg",
+};
+
 export function CategoryIcon({
   category,
   className,

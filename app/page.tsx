@@ -2,8 +2,8 @@ import { ToolSearch } from "@/components/tool-search";
 import { CATEGORIES, TOOLS, type ToolCategory } from "@/lib/tools";
 
 /**
- * `?category=PDF` (used by the tool-page breadcrumb) seeds the search box,
- * since the filter already matches on category.
+ * `?category=PDF` (used by the tool-page breadcrumb) pre-selects that category's
+ * filter pill.
  */
 export default function HomePage({
   searchParams,
@@ -11,8 +11,10 @@ export default function HomePage({
   searchParams?: { category?: string };
 }) {
   const requested = searchParams?.category;
-  const initialQuery =
-    requested && CATEGORIES.includes(requested as ToolCategory) ? requested : "";
+  const initialCategory =
+    requested && CATEGORIES.includes(requested as ToolCategory)
+      ? (requested as ToolCategory)
+      : null;
 
   return (
     <div className="mx-auto w-full max-w-content px-6 py-20 md:py-28">
@@ -30,7 +32,7 @@ export default function HomePage({
       </header>
 
       <div className="mt-10">
-        <ToolSearch initialQuery={initialQuery} />
+        <ToolSearch initialCategory={initialCategory} />
       </div>
     </div>
   );

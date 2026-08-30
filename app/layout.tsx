@@ -58,7 +58,17 @@ function SiteHeader() {
           <KaamvoMark className="h-8 w-8" />
           <span className="text-[22px] font-medium tracking-[-0.015em]">kaamvo</span>
         </Link>
-        <span className="text-[14px] text-muted">Runs in your browser</span>
+        <div className="flex items-center gap-4">
+          <span className="hidden text-[14px] text-muted sm:inline">Runs in your browser</span>
+          <a
+            href="https://buymeacoffee.com/farid.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-line px-3.5 py-1.5 text-[13px] font-medium text-ink transition-colors duration-150 hover:border-accent hover:text-accent-deep"
+          >
+            Buy me a coffee
+          </a>
+        </div>
       </div>
     </header>
   );

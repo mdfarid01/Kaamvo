@@ -1,5 +1,5 @@
 export { Card, CardTitle, CardDescription } from "./card";
-export { CategoryIcon } from "./category-icon";
+export { CategoryIcon, CATEGORY_ICON_BG } from "./category-icon";
 export { Button, ButtonLink } from "./button";
 export { DropZone } from "./drop-zone";
 export { FileList } from "./file-list";
