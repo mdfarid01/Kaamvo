@@ -1,5 +1,5 @@
 import { ToolSearch } from "@/components/tool-search";
-import { CATEGORIES, type ToolCategory } from "@/lib/tools";
+import { CATEGORIES, TOOLS, type ToolCategory } from "@/lib/tools";
 
 /**
  * `?category=PDF` (used by the tool-page breadcrumb) seeds the search box,
@@ -15,17 +15,21 @@ export default function HomePage({
     requested && CATEGORIES.includes(requested as ToolCategory) ? requested : "";
 
   return (
-    <div className="mx-auto w-full max-w-content px-6 py-14 md:py-20">
-      <header className="max-w-2xl">
-        <h1 className="text-[32px] font-medium leading-tight tracking-[-0.015em] text-ink md:text-[40px]">
+    <div className="mx-auto w-full max-w-content px-6 py-20 md:py-28">
+      <header className="max-w-3xl">
+        <span className="inline-flex items-center gap-2 rounded-full border border-line-soft bg-surface px-3 py-1 text-[13px] font-medium text-muted">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+          {TOOLS.length} tools, zero uploads
+        </span>
+        <h1 className="mt-5 text-[42px] font-medium leading-[1.08] tracking-[-0.02em] text-ink md:text-[56px]">
           Small tools that get the job done.
         </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-muted">
+        <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-muted">
           PDFs, images, text. Each one does a single thing, quickly, in your browser.
         </p>
       </header>
 
-      <div className="mt-8">
+      <div className="mt-10">
         <ToolSearch initialQuery={initialQuery} />
       </div>
     </div>

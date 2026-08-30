@@ -53,12 +53,12 @@ function KaamvoMark({ className }: { className?: string }) {
 function SiteHeader() {
   return (
     <header className="border-b border-line-soft">
-      <div className="mx-auto flex h-14 w-full max-w-content items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2 text-ink">
-          <KaamvoMark className="h-[22px] w-[22px]" />
-          <span className="text-[15px] font-medium tracking-[-0.01em]">kaamvo</span>
+      <div className="mx-auto flex h-[76px] w-full max-w-content items-center justify-between px-6">
+        <Link href="/" className="flex items-center gap-2.5 text-ink">
+          <KaamvoMark className="h-8 w-8" />
+          <span className="text-[22px] font-medium tracking-[-0.015em]">kaamvo</span>
         </Link>
-        <span className="text-[13px] text-muted">Runs in your browser</span>
+        <span className="text-[14px] text-muted">Runs in your browser</span>
       </div>
     </header>
   );

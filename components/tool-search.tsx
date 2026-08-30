@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { CategoryIcon } from "@/components/ui/category-icon";
 import { Tag } from "@/components/ui/tag";
 import { filterTools } from "@/lib/search";
 import { TOOLS } from "@/lib/tools";
@@ -25,16 +26,16 @@ export function ToolSearch({ initialQuery = "" }: { initialQuery?: string }) {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search tools — try “pdf” or “resize”"
           autoComplete="off"
-          className="h-11 w-full rounded-md border border-line bg-surface px-3.5 text-[15px] text-ink transition-colors duration-150 placeholder:text-faint focus:border-accent focus:outline-none focus:ring-[3px] focus:ring-accent/20"
+          className="h-12 w-full rounded-md border border-line bg-surface px-4 text-[16px] text-ink transition-colors duration-150 placeholder:text-faint focus:border-accent focus:outline-none focus:ring-[3px] focus:ring-accent/20"
         />
-        <p className="mt-2.5 text-[13px] text-muted">
+        <p className="mt-3 text-[14px] text-muted">
           No account required. Files never leave your device.
         </p>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-14">
         <div className="flex items-baseline justify-between">
-          <h2 className="text-[13px] font-medium uppercase tracking-[0.06em] text-muted">
+          <h2 className="text-[13px] font-medium uppercase tracking-[0.08em] text-muted">
             {query ? "Results" : "All tools"}
           </h2>
           <Tag>
@@ -43,26 +44,37 @@ export function ToolSearch({ initialQuery = "" }: { initialQuery?: string }) {
         </div>
 
         {results.length === 0 ? (
-          <div className="mt-4 rounded-lg border border-dashed border-line bg-surface px-6 py-12 text-center">
-            <p className="text-sm text-ink">No tools match “{query}”.</p>
+          <div className="mt-5 rounded-lg border border-dashed border-line bg-surface px-6 py-14 text-center">
+            <p className="text-[15px] text-ink">No tools match “{query}”.</p>
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="mt-2 text-[13px] text-accent underline underline-offset-2 hover:text-accent-hover"
+              className="mt-2.5 text-[14px] text-accent underline underline-offset-2 hover:text-accent-hover"
             >
               Clear search
             </button>
           </div>
         ) : (
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {results.map((tool) => (
               <li key={tool.slug}>
-                <Card href={`/tools/${tool.slug}`} className="h-full p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <CardTitle>{tool.name}</CardTitle>
-                    <Tag className="mt-0.5 shrink-0">{tool.category}</Tag>
+                <Card href={`/tools/${tool.slug}`} className="h-full p-5">
+                  {/* Inner flex row rather than flexing the Card itself — the
+                      linked variant sets `block` on the same element. */}
+                  <div className="flex gap-3.5">
+                    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-line-soft bg-canvas text-muted">
+                      <CategoryIcon category={tool.category} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <CardTitle className="text-[16px]">{tool.name}</CardTitle>
+                        <Tag className="mt-[3px] shrink-0">{tool.category}</Tag>
+                      </div>
+                      <CardDescription className="mt-2 text-[14px]">
+                        {tool.description}
+                      </CardDescription>
+                    </div>
                   </div>
-                  <CardDescription className="mt-1.5">{tool.description}</CardDescription>
                 </Card>
               </li>
             ))}
