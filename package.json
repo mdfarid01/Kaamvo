@@ -11,9 +11,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.39.6",
     "browser-image-compression": "^2.0.2",
     "geist": "^1.3.1",
-    "next": "14.2.15",
+    "next": "^14.2.35",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.6.205",
     "pptxgenjs": "^4.0.1",
@@ -28,7 +29,7 @@
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.15",
+    "eslint-config-next": "^14.2.35",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
     "typescript": "^5.5.3"

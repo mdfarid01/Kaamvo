@@ -3,6 +3,8 @@ import Link from "next/link";
 // The `geist` package wraps next/font/local around the shipped Geist files.
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { ClerkProvider } from "@clerk/nextjs";
+import { HeaderAuth } from "@/components/auth-controls";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,13 +27,30 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-screen font-sans">
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
-      </body>
-    </html>
+    // Accent + radii handed to Clerk so its hosted UI doesn't arrive as a
+    // blue-and-rounded island in the middle of the warm palette.
+    <ClerkProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      appearance={{
+        variables: {
+          colorPrimary: "#D85A30",
+          colorText: "#2C2C2A",
+          colorTextSecondary: "#6E6C64",
+          colorBackground: "#F7F6F1",
+          borderRadius: "6px",
+          fontFamily: "var(--font-geist-sans)",
+        },
+      }}
+    >
+      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+        <body className="min-h-screen font-sans">
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
 
@@ -58,17 +77,27 @@ function SiteHeader() {
           <KaamvoMark className="h-8 w-8" />
           <span className="text-[22px] font-medium tracking-[-0.015em]">kaamvo</span>
         </Link>
-        <div className="flex items-center gap-4">
-          <span className="hidden text-[14px] text-muted sm:inline">Runs in your browser</span>
+        <nav className="flex items-center gap-4">
+          <Link
+            href="/ai-tools"
+            className="inline-flex items-center gap-1.5 text-[14px] font-medium text-ink transition-colors duration-150 hover:text-accent-deep"
+          >
+            AI Tools
+            <span className="rounded bg-accent/[0.10] px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.06em] text-accent-deep">
+              Soon
+            </span>
+          </Link>
+          <span className="hidden text-[14px] text-muted lg:inline">Runs in your browser</span>
           <a
             href="https://buymeacoffee.com/farid.tech"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-line px-3.5 py-1.5 text-[13px] font-medium text-ink transition-colors duration-150 hover:border-accent hover:text-accent-deep"
+            className="hidden rounded-full border border-line px-3.5 py-1.5 text-[13px] font-medium text-ink transition-colors duration-150 hover:border-accent hover:text-accent-deep sm:inline-block"
           >
             Buy me a coffee
           </a>
-        </div>
+          <HeaderAuth />
+        </nav>
       </div>
     </header>
   );

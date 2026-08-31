@@ -10,3 +10,4 @@ npm-debug.log*
 next-env.d.ts
 tsconfig.tsbuildinfo
 .env.*
+.env.local
