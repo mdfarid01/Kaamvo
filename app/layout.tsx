@@ -6,6 +6,7 @@ import { GeistMono } from "geist/font/mono";
 import { ClerkProvider } from "@clerk/nextjs";
 import { HeaderAuth } from "@/components/auth-controls";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <SiteFooter />
           <Analytics />
+          <GoogleAnalytics gaId="G-KFNWQFWNGS" />
         </body>
       </html>
     </ClerkProvider>
