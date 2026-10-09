@@ -108,16 +108,16 @@ Everything else in `lib/` is one file per tool, named after it.
 
 ## 5. What's already built
 
-**41 tools registered, 39 live.** The only `status: "planned"` entries are `compress-pdf` and `pdf-to-image`.
+**41 tools registered, all 41 live.** There are no `status: "planned"` entries left, so `app/tools/[tool-name]` prerenders nothing and exists only as the fallback for the next one.
 
 Categories (`CATEGORIES` in [lib/tools.ts](lib/tools.ts)):
 
 | Category | Count | Tools |
 | --- | --- | --- |
-| **PDF** | 7 | Merge, Split, Compress *(planned)*, Rotate, Watermark, Add Page Numbers, Metadata Editor |
+| **PDF** | 7 | Merge, Split, Compress, Rotate, Watermark, Add Page Numbers, Metadata Editor |
 | **Image** | 5 | Resize, Compressor, Crop, Watermark, Passport Photo Maker |
 | **Text** | 4 | Word Counter, Text Formatter, JSON Formatter, Diff Checker |
-| **Convert** | 6 | PDF to Image *(planned)*, PDF to PPT, Image to PDF, Convert Image, Base64, Unit Converter |
+| **Convert** | 6 | PDF to Image, PDF to PPT, Image to PDF, Convert Image, Base64, Unit Converter |
 | **Generate** | 12 | QR Code, Password, Hash, Invoice, Rent Receipt, Salary Slip, Offer Letter, Weekly Study Planner, Worksheet Maker, Certificate Maker, vCard QR, Signature Pad |
 | **Finance** | 3 | EMI, SIP, Compound Interest |
 | **Everyday** | 4 | Random Picker, Age, Date Difference, Percentage |

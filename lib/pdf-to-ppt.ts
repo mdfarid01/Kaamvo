@@ -1,7 +1,8 @@
 /**
  * PDF → PowerPoint for the PDF to PPT tool. One PDF in, one .pptx out, the same
  * split as lib/pdf-split.ts and lib/image-to-pdf.ts: the UI layer stays a thin
- * wrapper and nothing outside this file touches pdfjs-dist or pptxgenjs.
+ * wrapper and nothing outside lib/ touches pdfjs-dist or pptxgenjs. Loading
+ * pdfjs itself is lib/pdfjs.ts, shared with PDF to Image.
  *
  * What this is honest about: the slides are pictures. Every page is rendered to
  * a PNG and dropped onto a slide, so the deck looks exactly like the PDF and
@@ -20,6 +21,7 @@
  */
 
 import { describeLoadError, isOutOfMemory } from "./pdf-load";
+import { SAFE_DOCUMENT_OPTIONS, loadPdfjs } from "./pdfjs";
 
 export type Resolution = "standard" | "high";
 
@@ -84,18 +86,12 @@ export async function pdfToPptx(
     return { ok: false, error: `Couldn't read ${file.name}.` };
   }
 
-  const pdfjs = await import("pdfjs-dist");
-  setWorker(pdfjs);
+  const pdfjs = await loadPdfjs();
 
   let doc: Awaited<ReturnType<typeof pdfjs.getDocument>["promise"]> | null = null;
 
   try {
-    doc = await pdfjs.getDocument({
-      data: bytes,
-      // Nothing here needs a PDF's own JavaScript or its annotations rendered,
-      // and not evaluating strings from a stranger's file is the safer default.
-      isEvalSupported: false,
-    }).promise;
+    doc = await pdfjs.getDocument({ data: bytes, ...SAFE_DOCUMENT_OPTIONS }).promise;
 
     const pageCount = doc.numPages;
     if (pageCount === 0) {
@@ -196,25 +192,6 @@ function fit(
   const w = h * imageAspect;
 
   return { x: (layout.width - w) / 2, y: (layout.height - h) / 2, w, h };
-}
-
-/**
- * pdfjs parses in a worker, and it has to be told where that file is. The
- * worker is served from public/ rather than pulled through the bundler:
- * `new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url)` — the form
- * webpack would normally emit an asset for — sends the file through Next's SWC
- * parser in script mode instead, and the build dies on pdfjs's own
- * `import.meta`. The copy is kept in step by the postinstall script in
- * package.json; a stale one makes pdfjs throw a version mismatch rather than
- * fail quietly.
- *
- * Set once, so a second conversion doesn't reassign it.
- */
-const WORKER_SRC = "/pdfjs/pdf.worker.min.mjs";
-
-function setWorker(pdfjs: typeof import("pdfjs-dist")): void {
-  if (pdfjs.GlobalWorkerOptions.workerSrc !== "") return;
-  pdfjs.GlobalWorkerOptions.workerSrc = WORKER_SRC;
 }
 
 function describeError(error: unknown, name: string): string {

@@ -85,8 +85,8 @@ function SiteHeader() {
           <Link
             href="/ai-tools"
             className="inline-flex items-center gap-1.5 text-[14px] font-medium text-ink transition-colors duration-150 hover:text-accent-deep"
-          >
-            AI Tools
+          > 
+            AI Tools 
             <span className="rounded bg-accent/[0.10] px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.06em] text-accent-deep">
               Soon
             </span>
@@ -110,9 +110,23 @@ function SiteHeader() {
 function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-line-soft">
-      <div className="mx-auto flex w-full max-w-content flex-col gap-1 px-6 py-8 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex w-full max-w-content flex-col gap-3 px-6 py-8 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
         <span>Kaamvo</span>
         <span>Nothing is uploaded. Everything runs locally.</span>
+        <nav className="flex items-center gap-4">
+          <Link href="/about" className="transition-colors duration-150 hover:text-accent-deep">
+            About
+          </Link>
+          <Link href="/contact" className="transition-colors duration-150 hover:text-accent-deep">
+            Contact
+          </Link>
+          <a
+            href="mailto:hello@kaamvo.in"
+            className="transition-colors duration-150 hover:text-accent-deep"
+          >
+            hello@kaamvo.in
+          </a>
+        </nav>
       </div>
     </footer>
   );

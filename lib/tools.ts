@@ -56,10 +56,13 @@ export const TOOLS: Tool[] = [
   {
     slug: "compress-pdf",
     name: "Compress PDF",
-    description: "Shrink a PDF's file size while keeping it readable.",
+    // What it does rather than what the name promises: this rewrites the file's
+    // structure and leaves the embedded images alone, so a scan barely moves.
+    // Better to say that on the home page than after someone has waited for it.
+    description: "Rewrite a PDF without the leftovers of earlier saves — smaller, and unchanged to read.",
     category: "PDF",
-    status: "planned",
-    keywords: ["reduce", "optimize", "smaller"],
+    status: "live",
+    keywords: ["reduce", "optimize", "smaller", "shrink", "compress", "file size", "email"],
   },
   {
     slug: "rotate-pdf",
@@ -115,8 +118,8 @@ export const TOOLS: Tool[] = [
     name: "PDF to Image",
     description: "Render each page of a PDF as a PNG or JPG.",
     category: "Convert",
-    status: "planned",
-    keywords: ["png", "jpg", "render", "screenshot"],
+    status: "live",
+    keywords: ["png", "jpg", "jpeg", "render", "screenshot", "pages", "export", "picture"],
   },
   {
     slug: "pdf-to-ppt",
