@@ -112,7 +112,7 @@ function SiteFooter() {
     <footer className="mt-20 border-t border-line-soft">
       <div className="mx-auto flex w-full max-w-content flex-col gap-3 px-6 py-8 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
         <span>Kaamvo</span>
-        <span>Nothing is uploaded. Everything runs locally.</span>
+        {/* <span>Nothing is uploaded. Everything runs locally.</span> */}
         <nav className="flex items-center gap-4">
           <Link href="/about" className="transition-colors duration-150 hover:text-accent-deep">
             About
